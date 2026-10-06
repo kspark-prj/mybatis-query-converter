@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-0-mapper.dtd">
+<mapper namespace="com.example.mapper.DeptMapper">
+
+    <!-- 1. 오라클 계층형 쿼리 (START WITH ... CONNECT BY) -> 검수 리포트 대상 -->
+    <select id="selectDeptTree" parameterType="map" resultType="deptVo">
+        SELECT 
+            DEPT_ID,
+            DEPT_NAME,
+            PARENT_DEPT_ID,
+            LEVEL AS DEPT_LEVEL
+        FROM TB_DEPT
+        START WITH PARENT_DEPT_ID IS NULL
+        CONNECT BY PRIOR DEPT_ID = PARENT_DEPT_ID
+        ORDER SIBLINGS BY DEPT_SORT_ORDER ASC
+    </select>
+
+    <!-- 2. DECODE 문 및 ROWNUM 쿼리 -->
+    <select id="selectDeptSummary" parameterType="map" resultType="map">
+        SELECT 
+            DEPT_ID,
+            DEPT_NAME,
+            DECODE(USE_YN, 'Y', '사용중', '미사용') AS USE_STATUS_NM,
+            NVL(EMP_COUNT, 0) AS EMP_COUNT
+        FROM TB_DEPT
+        WHERE ROWNUM &lt;= 50
+    </select>
+
+</mapper>

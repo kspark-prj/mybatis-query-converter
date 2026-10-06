@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.spec
+*.wal
+migration_review.log
+
+
+# PyInstaller build artifacts
+build/
+dist/
+sample_mappers_converted/
+migration_review.csv
+
+# Compiled Rust extension (.pyd / .so)
+*.pyd
+*.so
+
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+
+.codegraph/
+.ruff_cache/
+build/
+dist/
