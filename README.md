@@ -90,7 +90,7 @@ uv sync
 
 ```bash
 # uv 실행 (권장)
-uv run mybatis-migrator
+uv run src/mybatis_migrator/main.py
 
 # Python 직접 실행
 python src/mybatis_migrator/main.py
